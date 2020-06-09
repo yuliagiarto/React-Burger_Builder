@@ -99,8 +99,8 @@ class ContactData extends Component {
             value: true,
             message: "This field can't be empty!",
           },
-          format: {
-            value: /\S+@\S+\.\S+/,
+          isEmail: {
+            value: true,
             message: "Email format is invalid!",
           },
         },
@@ -136,7 +136,7 @@ class ContactData extends Component {
       orderData: formData,
     };
 
-    this.props.onOrderBurger(order);
+    this.props.onOrderBurger(order, this.props.token);
   };
 
   checkValidity(value, rules) {
@@ -160,6 +160,11 @@ class ContactData extends Component {
     if (rules.format) {
       isValid = value.match(rules.format.value) && isValid;
       errMsg = rules.format.message;
+    }
+    if (rules.isEmail) {
+      const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+      isValid = pattern.test(value) && isValid;
+      errMsg = rules.isEmail.message;
     }
     return [isValid, errMsg];
   }
@@ -231,12 +236,13 @@ const mapStateToProps = (state) => {
     ings: state.burgerBuilder.ingredients,
     price: state.burgerBuilder.totalPrice,
     loading: state.order.loading,
+    token : state.auth.token
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onOrderBurger: (orderData) => dispatch(actions.purchaseBurger(orderData)),
+    onOrderBurger: (orderData, token) => dispatch(actions.purchaseBurger(orderData,token)),
   };
 };
 
