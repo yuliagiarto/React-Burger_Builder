@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import axios from "../../axios-orders";
-import Aux from "../../hoc/Aux/Aux";
+import Aux from "../../hoc/Auk/Auk";
 import Burger from "../../components/Burger/Burger";
 import BuildControls from "../../components/Burger/BuildControls/BuildControls";
 import Modal from "../../components/UI/Modal/Modal";
@@ -69,9 +69,9 @@ class BurgerBuilder extends Component {
             ingredientRemoved={this.props.onIngredientRemoved}
             disabled={disabledInfo}
             purchasable={this.updatePurchaseState(this.props.ings)}
-            price={this.props.price}
             ordered={this.purchaseHandler}
             isAuth={this.props.isAuthenticated}
+            price={this.props.price}
           />
         </Aux>
       );
