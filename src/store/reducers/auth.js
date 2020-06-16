@@ -14,12 +14,13 @@ const authStart = (state, action) => {
 };
 
 const authSuccess = (state, action) => {
-  return updateObject(state, {
+  const obj = updateObject(state, {
     token: action.idToken,
     userId: action.userId,
     error: null,
     loading: false,
   });
+  return obj;
 };
 
 const authFail = (state, action) => {
