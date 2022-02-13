@@ -97,7 +97,7 @@
     "extends": "react-app"
   },
   "devDependencies": {
-    "ajv": "^6.12.2",
+    "ajv": "^6.12.3",
     "react-redux": "^7.2.0",
     "redux": "^4.0.5"
   }
